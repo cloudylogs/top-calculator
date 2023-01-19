@@ -26,6 +26,7 @@ body {
 .output {
     background-color: black;
     grid-column: -1 / 1;
+    color: white;
 }
 
 .span-two {
@@ -41,11 +42,13 @@ body {
     padding: 10px;
     word-wrap: break-word;
     word-break: break-all;
+    color: white;
 }
 
 button {
     background-color: rgb(44, 44, 46);
     border-width: thin;
+    cursor: pointer;
 }
 
 button:hover {
