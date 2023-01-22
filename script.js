@@ -50,23 +50,46 @@ class Calculator {
         this.operation = undefined;
         this.previousOperand = "";
     }
+
     percent() {
-        let percentage;
-        switch (this.operation) {
-            case "%":
-                percentage = parseFloat(this.currentOperand / 100)
-                break
-        }
+        const current = parseFloat(this.currentOperand);
+        let percentage = current / 100;
         this.currentOperand = percentage;
-        this.operation = undefined;
-        this.previousOperand = "";
-        console.log(percentage);
+    }
+
+    invert() {
+        const current = parseFloat(this.currentOperand);
+        let invert = current * -1;
+        this.currentOperand = invert;
+    }
+
+    getDisplayNumber(number) {
+        const stringNumber = number.toString();
+        const integerDigits = parseFloat(stringNumber.split(".")[0]);
+        const decimalDigits = stringNumber.split(".")[1];
+        let integerDisplay;
+        if (isNaN(integerDigits)) {
+            integerDisplay = "";
+        } else {
+            integerDisplay = integerDigits.toLocaleString("en", {
+                maximumFractionDigits: 0,
+            });
+        }
+        if (decimalDigits != null) {
+            return `${integerDigits}.${decimalDigits}`;
+        } else {
+            return integerDisplay;
+        }
     }
 
     updateDisplay() {
-        this.currentOperandTextElement.innerText = this.currentOperand;
-        if (this.operation !== undefined) {
-            this.previousOperandTextElement.innerText = `${this.previousOperand} ${this.operation}`;
+        this.currentOperandTextElement.innerText = this.getDisplayNumber(
+            this.currentOperand
+        );
+        if (this.operation != null) {
+            this.previousOperandTextElement.innerText = `${this.getDisplayNumber(
+                this.previousOperand
+            )} ${this.operation}`;
         } else {
             this.previousOperandTextElement.innerText = "";
         }
